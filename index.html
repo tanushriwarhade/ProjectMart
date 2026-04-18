@@ -55,7 +55,6 @@
     <!-- HERO -->
     <header id="home" class="hero-bg text-white pt-20 pb-10">
         <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
-            <!-- Left Content -->
             <div>
                 <div class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md border border-white/20 text-white text-xs font-semibold px-4 py-2 rounded-full mb-6">
                     <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
@@ -70,7 +69,7 @@
                 </p>
                 <div class="flex flex-wrap gap-3 mb-10">
                     <button onclick="scrollToSection('projects')" 
-                            class="bg-white text-blue-700 hover:bg-blue-50 transition-all px-7 py-3.5 rounded-full font-bold text-sm flex items-center gap-2 shadow-lg">
+                            class="bg-white text-blue-700 hover:bg-blue-50 transition-all px-7 py-3.5 rounded-full font-bold text-sm flex items-center gap-2 shadow-lg hover:shadow-xl">
                         Browse 120+ Projects <i class="fa-solid fa-arrow-right"></i>
                     </button>
                     <button onclick="showFreeModal()" 
@@ -85,12 +84,11 @@
                 </div>
             </div>
 
-            <!-- Right Image -->
             <div class="hidden md:block relative">
                 <div class="bg-white/10 border border-white/15 backdrop-blur-xl rounded-3xl p-4 shadow-2xl">
-                    <img src="https://picsum.photos/id/1015/800/560" class="rounded-2xl w-full shadow-xl" alt="ProjectMart">
+                    <img src="https://picsum.photos/id/1015/800/560" class="rounded-2xl w-full shadow-xl" alt="Student using ProjectMart">
                     <div id="heroBadge" class="absolute -bottom-5 -left-5 bg-white text-slate-900 rounded-2xl px-5 py-3.5 shadow-2xl flex items-center gap-3 transition-all duration-500" style="min-width:280px">
-                        <i class="fa-solid fa-circle-check text-emerald-500 text-xl"></i>
+                        <i class="fa-solid fa-circle-check text-emerald-500 text-xl flex-shrink-0"></i>
                         <div>
                             <div class="font-bold text-sm" id="heroBadgeTitle">Delivered in 8 seconds</div>
                             <div class="text-xs text-slate-500" id="heroBadgeSub">AI Resume Analyzer • Just bought by Tanu from Pimpri</div>
@@ -106,13 +104,26 @@
         <div class="section-header sora text-3xl font-extrabold mb-2">How ProjectMart Works</div>
         <p class="text-slate-500 mt-3 mb-12 text-base">From browsing to submission in under 5 minutes</p>
         <div class="grid md:grid-cols-4 gap-6">
-            <!-- 4 cards (same as your file) -->
-            <div class="text-center bg-white border-2 border-slate-100 rounded-2xl p-7 hover:border-blue-200 transition-all group">
-                <div class="w-14 h-14 mx-auto bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-3xl mb-5 group-hover:scale-110">🔎</div>
+            <div class="text-center bg-white border-2 border-slate-100 rounded-2xl p-7 hover:border-blue-200 hover:shadow-lg transition-all group">
+                <div class="w-14 h-14 mx-auto bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-3xl mb-5 group-hover:scale-110 transition-transform">🔎</div>
                 <h4 class="sora font-bold text-base mb-2">1. Browse &amp; Filter</h4>
-                <p class="text-slate-500 text-sm">Search by language, domain, price or college</p>
+                <p class="text-slate-500 text-sm leading-relaxed">Search by language, domain, price or college (SPPU, Pune University, Diploma)</p>
             </div>
-            <!-- Repeat for other 3 cards (copy from your original if needed) -->
+            <div class="text-center bg-white border-2 border-slate-100 rounded-2xl p-7 hover:border-blue-200 hover:shadow-lg transition-all group">
+                <div class="w-14 h-14 mx-auto bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-3xl mb-5 group-hover:scale-110 transition-transform">👀</div>
+                <h4 class="sora font-bold text-base mb-2">2. View Live Demo</h4>
+                <p class="text-slate-500 text-sm leading-relaxed">Watch 60-second video + screenshots + run instructions</p>
+            </div>
+            <div class="text-center bg-white border-2 border-slate-100 rounded-2xl p-7 hover:border-blue-200 hover:shadow-lg transition-all group">
+                <div class="w-14 h-14 mx-auto bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-3xl mb-5 group-hover:scale-110 transition-transform">💳</div>
+                <h4 class="sora font-bold text-base mb-2">3. Secure Payment</h4>
+                <p class="text-slate-500 text-sm leading-relaxed">Razorpay • UPI • Cards • Instant download link</p>
+            </div>
+            <div class="text-center bg-white border-2 border-slate-100 rounded-2xl p-7 hover:border-blue-200 hover:shadow-lg transition-all group">
+                <div class="w-14 h-14 mx-auto bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-3xl mb-5 group-hover:scale-110 transition-transform">📬</div>
+                <h4 class="sora font-bold text-base mb-2">4. Submit &amp; Score</h4>
+                <p class="text-slate-500 text-sm leading-relaxed">Report + PPT + Viva questions included. 100% plagiarism-free</p>
+            </div>
         </div>
     </section>
 
@@ -122,23 +133,49 @@
             <div class="section-header sora text-3xl font-extrabold mb-2">Popular Categories for 2026</div>
             <p class="text-slate-500 mt-3 mb-8 text-base">Click a category to browse projects instantly</p>
 
-            <!-- Category Grid -->
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5 mb-12">
-                <!-- Your 6 category cards here (same as uploaded file) -->
+                <div onclick="switchCat('ml',this)" class="cat-grid-item from-purple-50 border-purple-100 hover:border-purple-300 group">
+                    <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">🤖</div>
+                    <h4 class="sora font-bold text-sm mb-1">Machine Learning</h4>
+                    <p class="text-xs text-slate-400">Python • NLP • Vision</p>
+                </div>
+                <div onclick="switchCat('web',this)" class="cat-grid-item from-blue-50 border-blue-100 hover:border-blue-300 group">
+                    <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">🌐</div>
+                    <h4 class="sora font-bold text-sm mb-1">Web Development</h4>
+                    <p class="text-xs text-slate-400">Django • React</p>
+                </div>
+                <div onclick="switchCat('java',this)" class="cat-grid-item from-orange-50 border-orange-100 hover:border-orange-300 group">
+                    <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">☕</div>
+                    <h4 class="sora font-bold text-sm mb-1">Java / Spring Boot</h4>
+                    <p class="text-xs text-slate-400">Backend • Microservices</p>
+                </div>
+                <div onclick="switchCat('android',this)" class="cat-grid-item from-green-50 border-green-100 hover:border-green-300 group">
+                    <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">📱</div>
+                    <h4 class="sora font-bold text-sm mb-1">Android / Kotlin</h4>
+                    <p class="text-xs text-slate-400">Apps • Firebase</p>
+                </div>
+                <div onclick="switchCat('ds',this)" class="cat-grid-item from-rose-50 border-rose-100 hover:border-rose-300 group">
+                    <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">📊</div>
+                    <h4 class="sora font-bold text-sm mb-1">Data Science</h4>
+                    <p class="text-xs text-slate-400">Pandas • Power BI</p>
+                </div>
+                <div onclick="switchCat('other',this)" class="cat-grid-item from-amber-50 border-amber-100 hover:border-amber-300 group">
+                    <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">🔧</div>
+                    <h4 class="sora font-bold text-sm mb-1">Others</h4>
+                    <p class="text-xs text-slate-400">IoT • Blockchain</p>
+                </div>
             </div>
 
-            <!-- Horizontal Tabs -->
-            <div class="cat-tabs" id="catTabs">
-                <button class="cat-tab active" onclick="switchCat('all', this)">All Projects</button>
-                <button class="cat-tab" onclick="switchCat('ml', this)">Machine Learning</button>
-                <button class="cat-tab" onclick="switchCat('web', this)">Web Dev</button>
-                <button class="cat-tab" onclick="switchCat('java', this)">Java / Spring</button>
-                <button class="cat-tab" onclick="switchCat('android', this)">Android</button>
-                <button class="cat-tab" onclick="switchCat('ds', this)">Data Science</button>
-                <button class="cat-tab" onclick="switchCat('other', this)">Others</button>
+            <div class="cat-tabs mb-0" id="catTabs">
+                <button class="cat-tab active" onclick="switchCat('all',this)">All Projects</button>
+                <button class="cat-tab" onclick="switchCat('ml',this)">Machine Learning</button>
+                <button class="cat-tab" onclick="switchCat('web',this)">Web Dev</button>
+                <button class="cat-tab" onclick="switchCat('java',this)">Java / Spring</button>
+                <button class="cat-tab" onclick="switchCat('android',this)">Android</button>
+                <button class="cat-tab" onclick="switchCat('ds',this)">Data Science</button>
+                <button class="cat-tab" onclick="switchCat('other',this)">Others</button>
             </div>
 
-            <!-- Horizontal Projects Scroll -->
             <div id="catScroll" class="cat-scroll mt-5"></div>
         </div>
     </section>
@@ -150,18 +187,206 @@
                 <div class="section-header sora text-3xl font-extrabold">Trending Projects Right Now</div>
                 <p class="text-slate-500 text-sm mt-3">Updated 18 April 2026 • 42 new this week</p>
             </div>
-            <button onclick="switchCat('all', null)" class="text-blue-600 font-bold text-sm flex items-center gap-1.5">
-                View All Projects <i class="fa-solid fa-arrow-right"></i>
+            <button onclick="switchCat('all',null);scrollToSection('projects')" 
+                    class="text-blue-600 font-bold text-sm flex items-center gap-1.5 hover:gap-3 transition-all group">
+                View All Projects <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
             </button>
         </div>
         <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
     </section>
 
-    <!-- WHY CHOOSE US, TESTIMONIALS, SELL, FAQ, FOOTER -->
-    <!-- (Copy the remaining sections from your uploaded file) -->
+    <!-- WHY CHOOSE US -->
+    <section class="bg-gradient-to-r from-slate-900 to-slate-800 text-white py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="sora text-3xl font-extrabold text-center mb-14">Why 1200+ Pune Students Trust ProjectMart</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="why-card flex gap-5">
+                    <i class="fa-solid fa-shield-halved text-4xl text-emerald-400 mt-1 flex-shrink-0"></i>
+                    <div><h4 class="sora font-bold text-lg mb-2">100% Plagiarism Free</h4><p class="text-slate-400 text-sm leading-relaxed">Every project is original. Turnitin-ready reports included.</p></div>
+                </div>
+                <div class="why-card flex gap-5">
+                    <i class="fa-solid fa-headset text-4xl text-emerald-400 mt-1 flex-shrink-0"></i>
+                    <div><h4 class="sora font-bold text-lg mb-2">24×7 WhatsApp Support</h4><p class="text-slate-400 text-sm leading-relaxed">Stuck during viva? Our team replies within minutes.</p></div>
+                </div>
+                <div class="why-card flex gap-5">
+                    <i class="fa-solid fa-rotate-right text-4xl text-emerald-400 mt-1 flex-shrink-0"></i>
+                    <div><h4 class="sora font-bold text-lg mb-2">Money-Back Guarantee</h4><p class="text-slate-400 text-sm leading-relaxed">Project not working? Full refund in 48 hours.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- MODALS + CART SIDEBAR -->
-    <!-- Include all modals and cart sidebar from your original file -->
+    <!-- TESTIMONIALS -->
+    <section class="max-w-7xl mx-auto px-6 py-20">
+        <div class="section-header sora text-3xl font-extrabold text-center mb-2 mx-auto" style="display:table">Real Students, Real Results</div>
+        <p class="text-slate-500 text-center mt-4 mb-10 text-sm">Scroll to read more reviews →</p>
+        <div id="testiScroll" class="testi-scroll"></div>
+    </section>
+
+    <!-- SELL SECTION -->
+    <section id="sell" class="section-white py-20">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="sora text-3xl font-extrabold mb-3">Want to Earn While You Study?</h2>
+            <p class="max-w-lg mx-auto text-slate-500 text-base mb-8">Upload your college projects once • Earn 70% commission on every sale</p>
+            <div class="max-w-sm mx-auto mb-6">
+                <input id="sellerEmail" type="email" placeholder="Your college email (e.g. name@mit.edu)" 
+                       class="w-full px-5 py-3.5 rounded-full border-2 border-slate-200 focus:border-emerald-400 outline-none text-sm mb-4">
+                <button onclick="joinSellerWaitlist()" class="sell-btn w-full justify-center">
+                    Join Waitlist &amp; Start Earning <span class="text-lg">→</span>
+                </button>
+            </div>
+            <p class="text-xs text-slate-400">Already 43 student developers earning ₹15,000–45,000/month</p>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="max-w-7xl mx-auto px-6 py-20">
+        <div class="section-header sora text-3xl font-extrabold mb-2">Frequently Asked Questions</div>
+        <p class="text-slate-500 mt-3 mb-10 text-sm">Everything you need to know before buying</p>
+        <div class="max-w-2xl" id="faqList"></div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-5 gap-y-10 gap-x-6">
+            <div class="col-span-2 md:col-span-1">
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-sm"><i class="fa-solid fa-laptop-code"></i></div>
+                    <span class="sora font-bold text-lg">ProjectMart</span>
+                </div>
+                <p class="text-slate-400 text-xs leading-relaxed">Building the easiest way for CS/IT students to get A+ projects in Pune.</p>
+                <p class="text-slate-500 text-xs mt-4">Pimpri-Chinchwad, Pune, Maharashtra</p>
+            </div>
+            <div>
+                <h5 class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-4">Explore</h5>
+                <ul class="space-y-2 text-sm text-slate-300">
+                    <li class="hover:text-blue-400 cursor-pointer" onclick="switchCat('all',null);scrollToSection('projects')">Trending Projects</li>
+                    <li class="hover:text-blue-400 cursor-pointer" onclick="switchCat('ml',null);scrollToSection('projects')">ML &amp; AI Projects</li>
+                    <li class="hover:text-blue-400 cursor-pointer" onclick="switchCat('web',null);scrollToSection('projects')">Web Development</li>
+                    <li class="hover:text-blue-400 cursor-pointer" onclick="switchCat('java',null);scrollToSection('projects')">Java Full Stack</li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-4">Company</h5>
+                <ul class="space-y-2 text-sm text-slate-300">
+                    <li class="hover:text-blue-400 cursor-pointer" onclick="showToast('About page coming soon!')">About Us</li>
+                    <li class="hover:text-blue-400 cursor-pointer" onclick="showToast('Blog launching soon!')">Blog (Coding Tips)</li>
+                    <li class="hover:text-blue-400 cursor-pointer" onclick="scrollToSection('sell')">Become a Seller</li>
+                    <li class="hover:text-blue-400 cursor-pointer" onclick="openWhatsApp()">Contact (WhatsApp)</li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-4">Support</h5>
+                <ul class="space-y-2 text-sm text-slate-300">
+                    <li class="hover:text-blue-400 cursor-pointer" onclick="showToast('Setup guide will be emailed!')">How to Run Projects</li>
+                    <li class="hover:text-blue-400 cursor-pointer" onclick="showToast('Full refund within 48 hours')">Refund Policy</li>
+                    <li class="hover:text-blue-400 cursor-pointer" onclick="showToast('Order tracking in dashboard')">Track Order</li>
+                    <li class="hover:text-blue-400 cursor-pointer" onclick="showToast('25 viva Q&A included')">Viva Preparation</li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-4">Follow Us</h5>
+                <div class="flex gap-4 text-2xl text-slate-300">
+                    <i class="fa-brands fa-instagram cursor-pointer hover:text-pink-400" onclick="showToast('Instagram: @ProjectMart.in')"></i>
+                    <i class="fa-brands fa-youtube cursor-pointer hover:text-red-400" onclick="showToast('YouTube coming soon!')"></i>
+                    <i class="fa-brands fa-whatsapp cursor-pointer hover:text-green-400" onclick="openWhatsApp()"></i>
+                </div>
+                <div class="mt-10 text-xs text-slate-500">© 2026 ProjectMart • Made with ❤️ for Indian students</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- PROJECT MODAL -->
+    <div id="projectModal" class="modal-overlay" onclick="if(event.target===this)closeModal()">
+        <div class="modal-box">
+            <div class="p-8 md:p-10">
+                <div class="flex justify-between items-start mb-6 gap-4">
+                    <div id="modalHeader" class="flex-1"></div>
+                    <button onclick="closeModal()" class="text-3xl text-slate-300 hover:text-slate-700">×</button>
+                </div>
+                <div class="grid md:grid-cols-5 gap-8">
+                    <div class="md:col-span-3">
+                        <img id="modalImage" class="rounded-2xl w-full shadow-lg" alt="">
+                        <div class="mt-5 flex items-center justify-center gap-3 text-sm bg-slate-50 border border-slate-200 rounded-xl py-3 cursor-pointer hover:bg-blue-50" onclick="showToast('Demo video playing...')">
+                            <i class="fa-solid fa-play-circle text-blue-600 text-lg"></i>
+                            <span class="font-semibold text-slate-600">Watch 60-second demo video</span>
+                        </div>
+                    </div>
+                    <div class="md:col-span-2 space-y-6">
+                        <div>
+                            <div id="modalPrice" class="sora text-4xl font-extrabold text-slate-900 mb-1"></div>
+                            <div id="modalTechBadge"></div>
+                        </div>
+                        <div id="modalIncludes" class="space-y-2.5"></div>
+                        <div>
+                            <h4 class="font-bold text-sm mb-2 text-slate-700">Full Description</h4>
+                            <p id="modalDesc" class="text-slate-500 text-sm leading-relaxed"></p>
+                        </div>
+                        <button onclick="addToCartFromModal()" 
+                                class="w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold rounded-2xl flex items-center justify-center gap-3 transition-all">
+                            <i class="fa-solid fa-cart-shopping"></i> Add to Cart &amp; Buy Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOGIN MODAL -->
+    <div id="loginModal" class="modal-overlay" onclick="if(event.target===this)closeLoginModal()">
+        <div class="modal-box" style="max-width:420px">
+            <div class="p-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="sora text-2xl font-extrabold">Welcome Back 👋</h3>
+                    <button onclick="closeLoginModal()" class="text-3xl text-slate-300 hover:text-slate-700">×</button>
+                </div>
+                <div class="mb-4">
+                    <label class="text-xs font-bold text-slate-500 mb-1.5 block">Email Address</label>
+                    <input id="loginEmail" type="email" placeholder="you@college.edu" class="w-full px-4 py-3 border-2 border-slate-200 rounded-xl text-sm outline-none focus:border-blue-400">
+                </div>
+                <div class="mb-6">
+                    <label class="text-xs font-bold text-slate-500 mb-1.5 block">Password</label>
+                    <input id="loginPass" type="password" placeholder="••••••••" class="w-full px-4 py-3 border-2 border-slate-200 rounded-xl text-sm outline-none focus:border-blue-400">
+                </div>
+                <button onclick="doLogin()" class="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-sm mb-3">Login to My Account</button>
+                <button onclick="doRegister()" class="w-full py-3.5 border-2 border-slate-200 hover:border-blue-300 text-slate-600 font-bold rounded-xl text-sm">Create New Account</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FREE PROJECT MODAL -->
+    <div id="freeModal" class="modal-overlay" onclick="if(event.target===this)closeFreeModal()">
+        <div class="modal-box" style="max-width:400px">
+            <div class="p-8 text-center">
+                <div class="text-5xl mb-4">🎁</div>
+                <h3 class="sora text-2xl font-extrabold mb-3">Your FREE Mini Project</h3>
+                <p class="text-slate-500 text-sm mb-6">Simple Python Fireworks Animation — perfect for first-year students.</p>
+                <input id="freeEmail" type="email" placeholder="Enter your email for download link" 
+                       class="w-full px-4 py-3 border-2 border-slate-200 rounded-xl text-sm outline-none focus:border-pink-400 mb-4">
+                <button onclick="claimFreeProject()" class="w-full py-3.5 bg-gradient-to-r from-pink-500 to-violet-500 text-white font-bold rounded-xl text-sm">
+                    Download Free Project Now 🚀
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CART SIDEBAR -->
+    <div id="cartSidebar">
+        <div class="p-6 border-b border-slate-100 flex justify-between items-center">
+            <h3 class="sora text-xl font-extrabold">Your Cart 🛒</h3>
+            <button onclick="toggleCart()" class="text-3xl text-slate-300 hover:text-slate-600">×</button>
+        </div>
+        <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-6"></div>
+        <div class="p-6 border-t border-slate-100 bg-white">
+            <div class="flex justify-between items-center text-lg font-bold mb-4">
+                <span>Total</span><span id="cartTotalPrice" class="sora">₹0</span>
+            </div>
+            <button onclick="proceedToCheckout()" 
+                    class="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2">
+                <i class="fa-solid fa-credit-card"></i> Pay with Razorpay
+            </button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

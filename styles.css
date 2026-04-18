@@ -1,0 +1,56 @@
+:root {
+    --blue: #2563eb;
+    --blue-light: #3b82f6;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Manrope', sans-serif;
+    background: #f8fafc;
+    color: #0f172a;
+    overflow-x: hidden;
+}
+
+.sora { font-family: 'Sora', sans-serif; }
+
+/* Glassmorphism Navbar */
+#navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(255,255,255,0.82);
+    backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(255,255,255,0.6);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+    transition: all 0.3s ease;
+}
+
+#navbar.scrolled {
+    background: rgba(255,255,255,0.95);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+}
+
+.nav-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* Add all your other CSS classes here from the <style> tag in the uploaded file */
+
+.hero-bg {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 55%, #1d4ed8 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Keep all other styles you had in the <style> tag */
+.project-card:hover { transform: translateY(-8px) scale(1.01); }
+.cat-tab.active { background: #2563eb; color: white; }
+
+/* ... paste the rest of your CSS from the original file ... */

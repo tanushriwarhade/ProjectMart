@@ -235,11 +235,47 @@ body {
 }
 
 /* Category Tabs & Scroll */
+/* ====================== CATEGORIES SECTION ====================== */
+
+/* Category Grid Items */
+.cat-grid-item {
+    background: #fff;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cat-grid-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(37, 99, 235, 0.12);
+    border-color: rgba(59, 130, 246, 0.4);
+}
+
+/* Gradient backgrounds for category cards */
+.from-purple-50 { background: linear-gradient(135deg, #f3e8ff, #fff); border-color: #e9d5ff; }
+.from-blue-50    { background: linear-gradient(135deg, #eff6ff, #fff); border-color: #bfdbfe; }
+.from-orange-50  { background: linear-gradient(135deg, #fff7ed, #fff); border-color: #fed7aa; }
+.from-green-50   { background: linear-gradient(135deg, #f0fdf4, #fff); border-color: #bbf7d0; }
+.from-rose-50    { background: linear-gradient(135deg, #fff1f2, #fff); border-color: #fecdd3; }
+.from-amber-50   { background: linear-gradient(135deg, #fffbeb, #fff); border-color: #fde68c; }
+
+/* Category Tabs */
 .cat-tabs {
     display: flex;
     gap: 8px;
     overflow-x: auto;
     scrollbar-width: none;
+    padding-bottom: 4px;
+}
+
+.cat-tabs::-webkit-scrollbar {
+    display: none;
 }
 
 .cat-tab {
@@ -252,8 +288,13 @@ body {
     border: 1.5px solid #e2e8f0;
     background: #fff;
     color: #64748b;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
     white-space: nowrap;
+}
+
+.cat-tab:hover {
+    border-color: #3b82f6;
+    color: #2563eb;
 }
 
 .cat-tab.active {
@@ -263,6 +304,7 @@ body {
     box-shadow: 0 4px 14px rgba(37,99,235,0.3);
 }
 
+/* Horizontal Scroll Container */
 .cat-scroll {
     display: flex;
     gap: 14px;
@@ -273,6 +315,16 @@ body {
     scrollbar-color: #3b82f6 #e2e8f0;
 }
 
+.cat-scroll::-webkit-scrollbar {
+    height: 4px;
+}
+
+.cat-scroll::-webkit-scrollbar-thumb {
+    background: #3b82f6;
+    border-radius: 10px;
+}
+
+/* Individual Project Card in Horizontal Scroll */
 .cat-proj-card {
     min-width: 230px;
     background: #fff;
@@ -280,13 +332,69 @@ body {
     border-radius: 16px;
     overflow: hidden;
     cursor: pointer;
-    transition: all 0.25s;
+    transition: all 0.25s ease;
+    flex-shrink: 0;
 }
 
 .cat-proj-card:hover {
     border-color: #3b82f6;
     box-shadow: 0 8px 24px rgba(37,99,235,0.12);
     transform: translateY(-3px);
+}
+
+.cat-proj-card img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    display: block;
+}
+
+.cat-proj-card-info {
+    padding: 10px 12px 13px;
+}
+
+.cat-proj-card-info h4 {
+    font-family: 'Sora', sans-serif;
+    font-size: 0.83rem;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.cat-proj-card-info p {
+    font-size: 0.68rem;
+    color: #94a3b8;
+    margin-top: 2px;
+}
+
+.cat-proj-price {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #059669;
+    margin-top: 5px;
+}
+
+/* Section Header (already there, just ensuring) */
+.section-header {
+    display: inline-block;
+    position: relative;
+    padding-bottom: 10px;
+    margin-bottom: 6px;
+}
+
+.section-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 52px;
+    height: 3.5px;
+    background: linear-gradient(90deg, #2563eb, #60a5fa);
+    border-radius: 10px;
 }
 
 /* Section Header */

@@ -92,16 +92,32 @@ function showToast(msg) {
 }
 
 // ==================== CATEGORY & PROJECT RENDERING ====================
+// ==================== CATEGORY & PROJECT RENDERING ====================
 function switchCat(cat, el) {
     currentCat = cat;
+
+    // Remove active class from all tabs
     document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+
+    // Add active class to clicked tab
     if (el) el.classList.add('active');
+
     renderCatScroll(cat);
 }
 
 function renderCatScroll(cat) {
-    const filtered = cat === 'all' ? projectsDB : projectsDB.filter(p => p.category === cat);
-    document.getElementById('catScroll').innerHTML = filtered.map(p => `
+    const filtered = cat === 'all' 
+        ? projectsDB 
+        : projectsDB.filter(p => p.category === cat);
+
+    const container = document.getElementById('catScroll');
+
+    if (filtered.length === 0) {
+        container.innerHTML = `<p class="col-span-full text-center py-8 text-slate-400">No projects found in this category.</p>`;
+        return;
+    }
+
+    container.innerHTML = filtered.map(p => `
         <div class="cat-proj-card" onclick="showProjectModal(${p.id})">
             <img src="${p.image}" alt="${p.title}">
             <div class="cat-proj-card-info">
@@ -111,34 +127,6 @@ function renderCatScroll(cat) {
             </div>
         </div>
     `).join('');
-}
-
-function renderProjects(list) {
-    const grid = document.getElementById('projectsGrid');
-    grid.innerHTML = list.map(p => `
-        <div class="project-card" onclick="showProjectModal(${p.id})">
-            <div style="position:relative">
-                <img src="${p.image}" alt="${p.title}">
-                <div style="position:absolute;top:10px;right:10px;background:white;font-weight:700;padding:4px 12px;border-radius:9999px;font-size:0.85rem;">₹${p.price}</div>
-            </div>
-            <div class="p-5">
-                <h3 class="sora font-bold text-base mb-1">${p.title}</h3>
-                <p class="text-blue-600 text-xs mb-3">${p.tech}</p>
-                <p class="text-slate-500 text-xs line-clamp-2">${p.desc}</p>
-            </div>
-        </div>
-    `).join('');
-}
-
-function filterProjects() {
-    const term = document.getElementById('searchInput').value.toLowerCase().trim();
-    const filtered = projectsDB.filter(p => 
-        p.title.toLowerCase().includes(term) || 
-        p.tech.toLowerCase().includes(term) ||
-        p.desc.toLowerCase().includes(term)
-    );
-    renderProjects(filtered);
-    scrollToSection('projects');
 }
 
 // ==================== MODALS ====================

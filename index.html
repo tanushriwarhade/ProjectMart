@@ -3,460 +3,843 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProjectMart • Projects for B.Sc CS, B.Tech, Diploma Students | Pune</title>
+    <title>ProjectMart • Premium Projects for CS, IT, Diploma & Engineering Students</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
-        body { font-family: 'Inter', system_ui, sans-serif; }
-        .heading-font { font-family: 'Space Grotesk', sans-serif; }
-        .hero-bg { background: linear-gradient(92deg, #1e40af 0%, #3b82f6 100%); }
-        .project-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-        .project-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px -12px rgb(30 64 175 / 0.25); }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        :root {
+            --primary: #3b82f6;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .heading-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .hero-bg {
+            background: linear-gradient(92deg, #1e40af 0%, #3b82f6 100%);
+        }
+
+        .project-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 25px 25px 50px -12px rgb(59 130 246 / 0.25);
+        }
+
+        .section-header {
+            position: relative;
+        }
+        
+        .section-header::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, #3b82f6, #60a5fa);
+            bottom: -8px;
+            left: 0;
+            border-radius: 9999px;
+        }
+
+        .modal-content {
+            animation: modalPop 0.3s ease forwards;
+        }
+
+        @keyframes modalPop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .stat-number {
+            animation: countUp 2s ease forwards;
+        }
+
+        .nav-link {
+            position: relative;
+        }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #3b82f6;
+        }
     </style>
 </head>
-<body class="bg-slate-50">
+<body class="bg-zinc-50">
 
     <!-- NAVBAR -->
     <nav class="bg-white border-b sticky top-0 z-50 shadow-sm">
         <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="bg-[#1e40af] text-white w-10 h-10 rounded-2xl flex items-center justify-center text-3xl">
+                <div class="bg-blue-600 text-white w-10 h-10 rounded-2xl flex items-center justify-center text-2xl shadow-inner">
                     <i class="fa-solid fa-laptop-code"></i>
                 </div>
-                <h1 class="heading-font text-3xl">ProjectMart</h1>
-                <span class="text-xs bg-emerald-100 text-emerald-700 px-3 py-1 rounded-3xl font-medium">By Tanushri • Pune</span>
+                <h1 class="heading-font text-3xl tracking-[-1px]">ProjectMart</h1>
+                <span class="px-3 py-1 text-xs font-semibold bg-emerald-100 text-emerald-700 rounded-3xl">Pune • 2026</span>
             </div>
 
-            <div class="hidden md:flex gap-8 text-sm font-medium">
-                <a onclick="scrollToSection('projects')" class="cursor-pointer hover:text-[#1e40af]">Projects</a>
-                <a onclick="scrollToSection('for-students')" class="cursor-pointer hover:text-[#1e40af]">For Students</a>
-                <a onclick="scrollToSection('tips')" class="cursor-pointer hover:text-[#1e40af]">Viva Tips</a>
-                <a onclick="showContactModal()" class="cursor-pointer hover:text-[#1e40af]">Contact</a>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})" class="nav-link hover:text-blue-600 cursor-pointer">Projects</a>
+                <a onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})" class="nav-link hover:text-blue-600 cursor-pointer">How it Works</a>
+                <a onclick="document.getElementById('categories').scrollIntoView({behavior:'smooth'})" class="nav-link hover:text-blue-600 cursor-pointer">Categories</a>
+                <a onclick="document.getElementById('sell').scrollIntoView({behavior:'smooth'})" class="nav-link hover:text-blue-600 cursor-pointer">Sell Projects</a>
+                <a onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})" class="nav-link hover:text-blue-600 cursor-pointer">About Us</a>
+                <a onclick="document.getElementById('faq').scrollIntoView({behavior:'smooth'})" class="nav-link hover:text-blue-600 cursor-pointer">FAQ</a>
+                <a onclick="document.getElementById('support').scrollIntoView({behavior:'smooth'})" class="nav-link hover:text-blue-600 cursor-pointer">Support</a>
             </div>
 
-            <div class="flex items-center gap-5">
-                <button onclick="toggleCart()" class="relative flex items-center gap-2 px-5 py-3 hover:bg-slate-100 rounded-3xl">
+            <div class="flex items-center gap-4">
+                <div class="relative">
+                    <input id="searchInput" 
+                           onkeyup="if(event.key==='Enter') filterProjects()"
+                           type="text" 
+                           placeholder="Search Python, Java, ML, React..." 
+                           class="w-80 bg-zinc-100 border border-transparent focus:border-blue-300 focus:bg-white rounded-3xl px-5 py-3 text-sm outline-none">
+                    <i class="fa-solid fa-magnifying-glass absolute right-5 top-3.5 text-zinc-400"></i>
+                </div>
+
+                <button onclick="toggleCart()" class="relative flex items-center gap-2 px-4 py-3 hover:bg-zinc-100 rounded-3xl">
                     <i class="fa-solid fa-shopping-cart text-2xl"></i>
-                    <span id="cartCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">0</span>
+                    <span id="cartCountBadge" class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full">0</span>
                 </button>
-                <button onclick="showAccountModal()" 
-                        class="bg-[#1e40af] text-white px-6 py-3 rounded-3xl font-semibold text-sm flex items-center gap-2">
-                    <i class="fa-solid fa-user"></i> My Account
+
+                <button onclick="fakeLogin()" 
+                        class="flex items-center gap-2 bg-white border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-3xl font-semibold text-sm transition-all">
+                    <i class="fa-solid fa-user-circle"></i>
+                    <span>Login / Register</span>
                 </button>
             </div>
         </div>
     </nav>
 
     <!-- HERO -->
-    <header class="hero-bg text-white py-24">
-        <div class="max-w-7xl mx-auto px-6 text-center md:text-left">
-            <h1 class="heading-font text-6xl md:text-7xl leading-none mb-6">Stop Worrying About<br>Your Final Year Project</h1>
-            <p class="text-2xl text-blue-100 max-w-2xl mx-auto md:mx-0">Complete projects with code, report, PPT & viva questions. Made for B.Sc CS, B.Tech, Diploma & IT students in Pune.</p>
-            <div class="mt-10 flex flex-wrap gap-4 justify-center md:justify-start">
-                <button onclick="scrollToSection('projects')" class="bg-white text-[#1e40af] px-10 py-5 rounded-3xl text-xl font-semibold">Browse Projects</button>
-                <button onclick="showFreeProjectModal()" class="border-2 border-white px-8 py-5 rounded-3xl text-xl font-semibold">Get FREE Project</button>
+    <header class="hero-bg text-white pt-20 pb-16">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md text-white text-sm font-medium px-5 py-2 rounded-3xl mb-6">
+                    <i class="fa-solid fa-fire text-orange-300"></i>
+                    1,248 students bought this month • Pune + SPPU
+                </div>
+                
+                <h1 class="heading-font text-6xl md:text-7xl leading-none tracking-[-2px] mb-6">
+                    Complete Projects.<br>
+                    Zero Stress.<br>
+                    <span class="text-yellow-300">Instant Delivery.</span>
+                </h1>
+                
+                <p class="text-2xl text-blue-100 mb-10 max-w-lg">
+                    Ready-to-submit projects for B.Sc CS, B.Tech, Diploma &amp; IT students.<br>
+                    Source code + Report + PPT + Viva + Deployment = Guaranteed Marks
+                </p>
+
+                <div class="flex flex-wrap gap-4">
+                    <button onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})" 
+                            class="bg-white text-blue-700 hover:scale-105 transition-all px-10 py-5 rounded-3xl text-xl font-semibold flex items-center gap-3">
+                        <span>Browse 120+ Projects</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                    <button onclick="showFreeProjectModal()" 
+                            class="border-2 border-white/70 hover:bg-white/10 px-8 py-5 rounded-3xl text-xl font-semibold flex items-center gap-3">
+                        Get FREE Mini Project
+                    </button>
+                </div>
+
+                <!-- Trust stats -->
+                <div class="flex gap-12 mt-16 text-white/90">
+                    <div>
+                        <div class="text-4xl font-semibold stat-number" data-count="1248">0</div>
+                        <div class="text-sm uppercase tracking-widest">Students Helped</div>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-semibold stat-number" data-count="87">0</div>
+                        <div class="text-sm uppercase tracking-widest">Projects Delivered Today</div>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-semibold stat-number" data-count="4.98">0</div>
+                        <div class="text-sm uppercase tracking-widest">Average Rating</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero visual -->
+            <div class="hidden md:block relative">
+                <div class="bg-white/10 backdrop-blur-xl rounded-3xl p-4 shadow-2xl">
+                    <img src="https://picsum.photos/id/1015/800/560" 
+                         class="rounded-3xl shadow-2xl w-full" alt="Student using ProjectMart">
+                    <div class="absolute -bottom-4 -left-4 bg-white text-zinc-900 rounded-2xl px-6 py-4 shadow-xl flex items-center gap-3">
+                        <i class="fa-solid fa-check-circle text-emerald-500 text-3xl"></i>
+                        <div>
+                            <div class="font-semibold">Delivered in 8 seconds</div>
+                            <div class="text-sm text-zinc-500">AI Resume Analyzer • Just bought by Tanu from Pimpri</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- FOR STUDENTS -->
-    <section id="for-students" class="max-w-7xl mx-auto px-6 py-20 bg-white">
-        <h2 class="text-4xl font-semibold mb-8 text-center">Made for Students Like You</h2>
-        <div class="grid md:grid-cols-3 gap-8">
-            <div class="bg-slate-50 p-8 rounded-3xl text-center">
-                <h4 class="font-semibold text-2xl mb-4">B.Sc CS</h4>
-                <p class="text-slate-600">Mini & Major projects aligned with SPPU syllabus</p>
+    <!-- HOW IT WORKS -->
+    <section id="how" class="max-w-7xl mx-auto px-6 py-20">
+        <h2 class="section-header text-4xl font-semibold mb-4">How ProjectMart Works</h2>
+        <p class="text-xl text-zinc-600 mb-12">From browsing to submission in under 5 minutes</p>
+        
+        <div class="grid md:grid-cols-4 gap-8">
+            <div class="text-center">
+                <div class="w-16 h-16 mx-auto bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center text-4xl mb-6">🔎</div>
+                <h4 class="font-semibold text-xl mb-2">1. Browse &amp; Filter</h4>
+                <p class="text-zinc-600">Search by language, domain, price or college (SPPU, Pune University, Diploma)</p>
             </div>
-            <div class="bg-slate-50 p-8 rounded-3xl text-center">
-                <h4 class="font-semibold text-2xl mb-4">Engineering</h4>
-                <p class="text-slate-600">Final year projects with live demo & deployment</p>
+            <div class="text-center">
+                <div class="w-16 h-16 mx-auto bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center text-4xl mb-6">👀</div>
+                <h4 class="font-semibold text-xl mb-2">2. View Live Demo</h4>
+                <p class="text-zinc-600">Watch 60-second video + screenshots + run instructions</p>
             </div>
-            <div class="bg-slate-50 p-8 rounded-3xl text-center">
-                <h4 class="font-semibold text-2xl mb-4">Diploma</h4>
-                <p class="text-slate-600">Easy to run, short reports, affordable price</p>
+            <div class="text-center">
+                <div class="w-16 h-16 mx-auto bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center text-4xl mb-6">💳</div>
+                <h4 class="font-semibold text-xl mb-2">3. Secure Payment</h4>
+                <p class="text-zinc-600">Razorpay • UPI • Cards • Instant download link</p>
+            </div>
+            <div class="text-center">
+                <div class="w-16 h-16 mx-auto bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center text-4xl mb-6">📬</div>
+                <h4 class="font-semibold text-xl mb-2">4. Submit &amp; Score</h4>
+                <p class="text-zinc-600">Report + PPT + Viva questions included. 100% plagiarism-free guarantee</p>
             </div>
         </div>
     </section>
 
-    <!-- PROJECTS -->
-    <section id="projects" class="max-w-7xl mx-auto px-6 py-20">
-        <h2 class="text-4xl font-semibold mb-12">Available Projects</h2>
-        <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- JS populated -->
-        </div>
-    </section>
-
-    <!-- VIVA TIPS -->
-    <section id="tips" class="max-w-7xl mx-auto px-6 py-20 bg-slate-100">
-        <h2 class="text-4xl font-semibold mb-12 text-center">Viva Tips from a Student</h2>
-        <div class="max-w-3xl mx-auto space-y-8">
-            <div class="flex gap-6"><span class="text-4xl">1️⃣</span><div><strong>Read every comment</strong> in the code</div></div>
-            <div class="flex gap-6"><span class="text-4xl">2️⃣</span><div><strong>Practice running the project</strong> multiple times</div></div>
-            <div class="flex gap-6"><span class="text-4xl">3️⃣</span><div><strong>Use the viva questions</strong> I provide with every project</div></div>
-        </div>
-    </section>
-
-    <!-- DETAILED FOOTER -->
-    <footer class="bg-slate-900 text-slate-300 py-20">
+    <!-- CATEGORIES -->
+    <section id="categories" class="bg-white py-20">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-10">
-                <div>
-                    <div class="flex items-center gap-3 text-white text-3xl mb-6">
-                        <i class="fa-solid fa-laptop-code"></i>
-                        <span class="heading-font">ProjectMart</span>
-                    </div>
-                    <p class="text-sm">Professional projects by Tanushri Warhade for CS & IT students in Pune.</p>
+            <h2 class="section-header text-4xl font-semibold mb-12">Popular Categories for 2026</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                <div onclick="filterByCategory('ml')" class="group bg-gradient-to-br from-purple-100 to-white border border-purple-200 hover:border-purple-400 rounded-3xl p-8 flex flex-col items-center text-center cursor-pointer transition-all hover:shadow-xl">
+                    <div class="text-5xl mb-4">🤖</div>
+                    <h4 class="font-semibold text-xl">Machine Learning</h4>
+                    <p class="text-sm text-zinc-500">Python • NLP • Computer Vision</p>
                 </div>
-                <div>
-                    <h5 class="font-semibold text-white mb-6">Quick Links</h5>
-                    <ul class="space-y-3 text-sm">
-                        <li onclick="scrollToSection('projects')" class="cursor-pointer hover:text-white">All Projects</li>
-                        <li onclick="scrollToSection('for-students')" class="cursor-pointer hover:text-white">For Students</li>
-                        <li onclick="scrollToSection('tips')" class="cursor-pointer hover:text-white">Viva Tips</li>
-                    </ul>
+                <div onclick="filterByCategory('web')" class="group bg-gradient-to-br from-blue-100 to-white border border-blue-200 hover:border-blue-400 rounded-3xl p-8 flex flex-col items-center text-center cursor-pointer transition-all hover:shadow-xl">
+                    <div class="text-5xl mb-4">🌐</div>
+                    <h4 class="font-semibold text-xl">Web Development</h4>
+                    <p class="text-sm text-zinc-500">Django • React • Full-Stack</p>
                 </div>
-                <div>
-                    <h5 class="font-semibold text-white mb-6">Support</h5>
-                    <ul class="space-y-3 text-sm">
-                        <li>Email: tanu.projectmart@gmail.com</li>
-                        <li>WhatsApp Support</li>
-                        <li>24×7 Help</li>
-                    </ul>
+                <div onclick="filterByCategory('java')" class="group bg-gradient-to-br from-orange-100 to-white border border-orange-200 hover:border-orange-400 rounded-3xl p-8 flex flex-col items-center text-center cursor-pointer transition-all hover:shadow-xl">
+                    <div class="text-5xl mb-4">☕</div>
+                    <h4 class="font-semibold text-xl">Java / Spring Boot</h4>
+                    <p class="text-sm text-zinc-500">Backend • Microservices</p>
                 </div>
-                <div>
-                    <h5 class="font-semibold text-white mb-6">Categories</h5>
-                    <ul class="space-y-3 text-sm">
-                        <li>Machine Learning</li>
-                        <li>Web Development</li>
-                        <li>Android Apps</li>
-                        <li>Java Projects</li>
-                    </ul>
+                <div onclick="filterByCategory('android')" class="group bg-gradient-to-br from-green-100 to-white border border-green-200 hover:border-green-400 rounded-3xl p-8 flex flex-col items-center text-center cursor-pointer transition-all hover:shadow-xl">
+                    <div class="text-5xl mb-4">📱</div>
+                    <h4 class="font-semibold text-xl">Android / Kotlin</h4>
+                    <p class="text-sm text-zinc-500">Apps • Firebase</p>
                 </div>
-                <div>
-                    <h5 class="font-semibold text-white mb-6">Newsletter</h5>
-                    <input id="newsletterEmail" type="email" placeholder="your@email.com" class="w-full px-5 py-4 bg-slate-800 rounded-3xl text-sm mb-4">
-                    <button onclick="subscribeNewsletter()" class="w-full bg-[#1e40af] py-4 rounded-3xl text-white">Subscribe</button>
-                    <p id="newsletterMsg" class="text-emerald-400 text-xs mt-3 hidden">✅ Thank you! Confirmation sent.</p>
+                <div onclick="filterByCategory('ds')" class="group bg-gradient-to-br from-rose-100 to-white border border-rose-200 hover:border-rose-400 rounded-3xl p-8 flex flex-col items-center text-center cursor-pointer transition-all hover:shadow-xl">
+                    <div class="text-5xl mb-4">📊</div>
+                    <h4 class="font-semibold text-xl">Data Science</h4>
+                    <p class="text-sm text-zinc-500">Pandas • Power BI • Dashboards</p>
+                </div>
+                <div onclick="filterByCategory('other')" class="group bg-gradient-to-br from-amber-100 to-white border border-amber-200 hover:border-amber-400 rounded-3xl p-8 flex flex-col items-center text-center cursor-pointer transition-all hover:shadow-xl">
+                    <div class="text-5xl mb-4">🔧</div>
+                    <h4 class="font-semibold text-xl">Others</h4>
+                    <p class="text-sm text-zinc-500">IoT • Blockchain • Game Dev</p>
                 </div>
             </div>
-            <div class="text-center text-xs text-slate-500 mt-16">
-                © 2026 ProjectMart • Single Seller • Pune, Maharashtra
+        </div>
+    </section>
+
+    <!-- TRENDING PROJECTS -->
+    <section id="projects" class="max-w-7xl mx-auto px-6 py-20">
+        <div class="flex justify-between items-end mb-10">
+            <div>
+                <h2 class="section-header text-4xl font-semibold">Trending Projects Right Now</h2>
+                <p class="text-zinc-600 text-lg">Updated 18 April 2026 • 42 new this week</p>
+            </div>
+            <button onclick="filterByCategory('all')" 
+                    class="text-blue-600 font-medium flex items-center gap-2 hover:gap-3 transition-all">
+                View All Projects <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <!-- Populated by JS -->
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE US -->
+    <section class="bg-gradient-to-r from-zinc-900 to-black text-white py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-semibold text-center mb-16">Why 1200+ Pune Students Trust ProjectMart</h2>
+            <div class="grid md:grid-cols-3 gap-10">
+                <div class="flex gap-6">
+                    <i class="fa-solid fa-shield-halved text-5xl text-emerald-400 mt-1"></i>
+                    <div>
+                        <h4 class="text-2xl font-semibold mb-2">100% Plagiarism Free</h4>
+                        <p class="text-zinc-400">Every project is original. Turnitin-ready reports included.</p>
+                    </div>
+                </div>
+                <div class="flex gap-6">
+                    <i class="fa-solid fa-headset text-5xl text-emerald-400 mt-1"></i>
+                    <div>
+                        <h4 class="text-2xl font-semibold mb-2">24×7 WhatsApp Support</h4>
+                        <p class="text-zinc-400">Stuck during viva? Our team replies within minutes.</p>
+                    </div>
+                </div>
+                <div class="flex gap-6">
+                    <i class="fa-solid fa-rotate-right text-5xl text-emerald-400 mt-1"></i>
+                    <div>
+                        <h4 class="text-2xl font-semibold mb-2">Money-Back Guarantee</h4>
+                        <p class="text-zinc-400">Project not working? Full refund in 48 hours.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="max-w-7xl mx-auto px-6 py-20">
+        <h2 class="section-header text-4xl font-semibold mb-12 text-center">Real Students, Real Results</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white p-8 rounded-3xl shadow">
+                <div class="flex mb-6">
+                    <i class="fa-solid fa-star text-yellow-400"></i>
+                    <i class="fa-solid fa-star text-yellow-400"></i>
+                    <i class="fa-solid fa-star text-yellow-400"></i>
+                    <i class="fa-solid fa-star text-yellow-400"></i>
+                    <i class="fa-solid fa-star text-yellow-400"></i>
+                </div>
+                <p class="italic">"Got 92/100 in my major project. The documentation was so good that even my guide was impressed!"</p>
+                <div class="mt-8 flex items-center gap-3">
+                    <div class="w-10 h-10 bg-purple-200 rounded-2xl"></div>
+                    <div>
+                        <div class="font-medium">Rohan Patil</div>
+                        <div class="text-sm text-zinc-500">B.Sc CS Final Year, Fergusson College</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white p-8 rounded-3xl shadow">
+                <div class="flex mb-6">
+                    <i class="fa-solid fa-star text-yellow-400"></i>
+                    <i class="fa-solid fa-star text-yellow-400"></i>
+                    <i class="fa-solid fa-star text-yellow-400"></i>
+                    <i class="fa-solid fa-star text-yellow-400"></i>
+                    <i class="fa-solid fa-star text-yellow-400"></i>
+                </div>
+                <p class="italic">"Bought the Smart Attendance System. Ran perfectly on first try. Saved me 3 weeks of coding!"</p>
+                <div class="mt-8 flex items-center gap-3">
+                    <div class="w-10 h-10 bg-orange-200 rounded-2xl"></div>
+                    <div>
+                        <div class="font-medium">Sneha Deshmukh</div>
+                        <div class="text-sm text-zinc-500">Diploma IT, Pimpri Chinchwad Polytechnic</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white p-8 rounded-3xl shadow">
+                <div class="flex mb-6">
+                    <i class="fa-solid fa-star text-yellow-400"></i>
+                    <i class="fa-solid fa-star text-yellow-400"></i>
+                    <i class="fa-solid fa-star text-yellow-400"></i>
+                    <i class="fa-solid fa-star text-yellow-400"></i>
+                    <i class="fa-solid fa-star text-yellow-400"></i>
+                </div>
+                <p class="italic">"The React + Tailwind e-commerce project got me my first internship offer. Thank you ProjectMart!"</p>
+                <div class="mt-8 flex items-center gap-3">
+                    <div class="w-10 h-10 bg-teal-200 rounded-2xl"></div>
+                    <div>
+                        <div class="font-medium">Aarav Kulkarni</div>
+                        <div class="text-sm text-zinc-500">B.Tech IT, SPPU 2026 Batch</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BECOME A SELLER -->
+    <section id="sell" class="bg-white py-20 border-t border-b">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-4xl font-semibold mb-4">Want to Earn While You Study?</h2>
+            <p class="max-w-lg mx-auto text-xl text-zinc-600 mb-8">Upload your college projects once • Earn 70% commission on every sale</p>
+            <button onclick="alert('Seller dashboard coming in full Django version! Join waitlist?')" 
+                    class="bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-12 py-6 rounded-3xl text-2xl font-semibold inline-flex items-center gap-4 hover:shadow-2xl">
+                Start Earning Today <span class="text-3xl">→</span>
+            </button>
+            <p class="text-sm text-zinc-500 mt-6">Already 43 student developers earning ₹15,000–45,000/month</p>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="max-w-7xl mx-auto px-6 py-20">
+        <h2 class="section-header text-4xl font-semibold mb-12">Frequently Asked Questions</h2>
+        <div class="max-w-3xl mx-auto space-y-4">
+            <details class="bg-white rounded-3xl p-6 cursor-pointer group">
+                <summary class="flex justify-between items-center text-lg font-medium">Is the project ready for direct submission?</summary>
+                <p class="mt-4 text-zinc-600">Yes! Every project comes with full source code, detailed report (25-40 pages), PPT, and viva questions. Just run it once and submit.</p>
+            </details>
+            <details class="bg-white rounded-3xl p-6 cursor-pointer group">
+                <summary class="flex justify-between items-center text-lg font-medium">Do you provide custom projects?</summary>
+                <p class="mt-4 text-zinc-600">Absolutely. Tell us your topic → we build it in 4–7 days → price starts at ₹4,999.</p>
+            </details>
+            <details class="bg-white rounded-3xl p-6 cursor-pointer group">
+                <summary class="flex justify-between items-center text-lg font-medium">Is payment secure?</summary>
+                <p class="mt-4 text-zinc-600">100% secure with Razorpay. You only pay after seeing the demo video.</p>
+            </details>
+            <details class="bg-white rounded-3xl p-6 cursor-pointer group">
+                <summary class="flex justify-between items-center text-lg font-medium">Can I get it customized for my college?</summary>
+                <p class="mt-4 text-zinc-600">Yes! Just mention your university name (SPPU, Mumbai University, etc.) in the notes.</p>
+            </details>
+        </div>
+    </section>
+
+    <!-- ABOUT US SECTION -->
+    <section id="about" class="max-w-7xl mx-auto px-6 py-20 bg-zinc-50">
+        <h2 class="section-header text-4xl font-semibold mb-8">About Us</h2>
+        <p class="text-xl text-zinc-600 max-w-3xl">ProjectMart is a student-first platform based in Pune, helping thousands of CS, IT, Diploma and Engineering students submit high-quality, ready-to-submit projects with complete documentation and guaranteed marks.</p>
+    </section>
+
+    <!-- SUPPORT SECTION -->
+    <section id="support" class="max-w-7xl mx-auto px-6 py-20">
+        <h2 class="section-header text-4xl font-semibold mb-12">Support</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+            <div onclick="alert('How to Run Projects:\n\n1. Download the project zip file\n2. Extract the folder\n3. Read the included README or watch the demo video\n4. Install dependencies and run the main file.')" 
+                 class="bg-white p-8 rounded-3xl border cursor-pointer hover:shadow-md transition-all">
+                <h3 class="font-semibold text-xl mb-3">How to Run Projects</h3>
+                <p class="text-zinc-600">Step-by-step instructions to run any purchased project on your system.</p>
+            </div>
+            <div onclick="alert('Refund Policy:\n\nFull money back within 48 hours if the project does not work on your laptop. Contact support on WhatsApp.')" 
+                 class="bg-white p-8 rounded-3xl border cursor-pointer hover:shadow-md transition-all">
+                <h3 class="font-semibold text-xl mb-3">Refund Policy</h3>
+                <p class="text-zinc-600">We offer full refund if you face any technical issues.</p>
+            </div>
+            <div onclick="alert('Track Your Order:\n\nAfter purchase, login to your account to track order status and download links.')" 
+                 class="bg-white p-8 rounded-3xl border cursor-pointer hover:shadow-md transition-all">
+                <h3 class="font-semibold text-xl mb-3">Track Your Order</h3>
+                <p class="text-zinc-600">Check the status of your order and download your files anytime.</p>
+            </div>
+            <div onclick="alert('Viva Preparation Guide:\n\nEvery project includes 25+ expected viva questions with model answers to help you prepare confidently.')" 
+                 class="bg-white p-8 rounded-3xl border cursor-pointer hover:shadow-md transition-all">
+                <h3 class="font-semibold text-xl mb-3">Viva Preparation Guide</h3>
+                <p class="text-zinc-600">Get ready for your project viva with included questions and answers.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCT MODAL -->
+    <div id="projectModal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[9999]">
+        <div class="modal-content bg-white max-w-4xl w-full mx-4 rounded-3xl max-h-[92vh] overflow-auto">
+            <div class="p-8 md:p-10">
+                <div class="flex justify-between mb-6">
+                    <div id="modalHeader" class="flex-1"></div>
+                    <button onclick="closeModal()" class="text-4xl text-zinc-400 hover:text-black">×</button>
+                </div>
+
+                <div class="grid md:grid-cols-5 gap-10">
+                    <div class="md:col-span-3">
+                        <img id="modalImage" class="rounded-3xl w-full shadow-xl" alt="">
+                        <div class="mt-6 flex items-center justify-center gap-3 text-sm bg-zinc-100 rounded-2xl py-3">
+                            <i class="fa-solid fa-play-circle text-blue-600"></i>
+                            <span id="modalVideoText" class="font-medium">Watch 60-second demo video</span>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-2 space-y-8">
+                        <div>
+                            <div id="modalPrice" class="text-5xl font-semibold"></div>
+                            <div id="modalTechStack" class="text-blue-600 font-medium"></div>
+                        </div>
+
+                        <div id="modalIncludes" class="space-y-3 text-sm"></div>
+
+                        <div>
+                            <h4 class="font-semibold mb-3">Full Description</h4>
+                            <p id="modalDesc" class="text-zinc-600 leading-relaxed"></p>
+                        </div>
+
+                        <button onclick="addToCartFromModal()" 
+                                class="w-full py-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xl font-semibold rounded-3xl flex items-center justify-center gap-3 hover:from-blue-700 hover:to-indigo-700">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            Add to Cart &amp; Buy Now
+                        </button>
+
+                        <div class="text-xs flex items-center gap-4 text-emerald-600">
+                            <i class="fa-solid fa-lock"></i>
+                            Secure checkout • Instant download after payment
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CART SIDEBAR -->
+    <div id="cartSidebar" class="hidden fixed top-0 right-0 h-screen w-full max-w-lg bg-white shadow-2xl z-[10000] overflow-auto">
+        <div class="p-8 border-b flex justify-between">
+            <h3 class="text-3xl font-semibold">Your Cart</h3>
+            <button onclick="toggleCart()" class="text-4xl text-zinc-400">×</button>
+        </div>
+        
+        <div id="cartItemsContainer" class="p-8"></div>
+        
+        <div class="p-8 border-t mt-auto sticky bottom-0 bg-white">
+            <div class="flex justify-between text-2xl font-semibold mb-8">
+                <span>Total</span>
+                <span id="cartTotalPrice">₹0</span>
+            </div>
+            <button onclick="proceedToCheckout()" 
+                    class="w-full py-7 bg-emerald-600 hover:bg-emerald-700 text-white rounded-3xl text-2xl font-semibold flex items-center justify-center gap-3">
+                Pay with Razorpay
+                <i class="fa-solid fa-credit-card"></i>
+            </button>
+            <p class="text-center text-xs text-zinc-400 mt-6">Demo mode • Real version uses live Razorpay</p>
+        </div>
+    </div>
+
+    <!-- FREE PROJECT TEASER MODAL -->
+    <div id="freeModal" onclick="if(event.target.id==='freeModal')closeFreeModal()" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[11000]">
+        <div class="bg-white rounded-3xl max-w-md w-full p-10 text-center">
+            <h3 class="text-3xl font-semibold mb-4">🎁 Your FREE Mini Project</h3>
+            <p class="mb-8">Simple Python Fireworks Animation (Perfect for first-year students)</p>
+            <button onclick="claimFreeProject()" 
+                    class="w-full py-6 bg-gradient-to-r from-pink-500 to-violet-500 text-white rounded-3xl text-xl font-semibold">
+                Download Free Project Now
+            </button>
+            <p class="text-xs text-zinc-500 mt-8">No signup • No payment • Just for you</p>
+        </div>
+    </div>
+
+    <!-- FOOTER - UNCHANGED -->
+    <footer class="bg-zinc-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-5 gap-y-10">
+            <div>
+                <div class="flex items-center gap-3 text-2xl mb-6">
+                    <i class="fa-solid fa-laptop-code"></i>
+                    <span class="heading-font">ProjectMart</span>
+                </div>
+                <p class="text-zinc-400 text-sm">Building the easiest way for CS/IT students to get A+ projects.</p>
+                <p class="text-xs text-zinc-500 mt-8">Pimpri-Chinchwad, Pune, Maharashtra</p>
+            </div>
+            <div>
+                <h5 class="font-medium mb-4 text-zinc-400">Explore</h5>
+                <ul class="space-y-2 text-sm">
+                    <li>Trending Projects</li>
+                    <li>ML &amp; AI Projects</li>
+                    <li>Web Development</li>
+                    <li>Java Full Stack</li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-medium mb-4 text-zinc-400">Company</h5>
+                <ul class="space-y-2 text-sm">
+                    <li>About Us</li>
+                    <li>Blog (Coding Tips)</li>
+                    <li>Become a Seller</li>
+                    <li>Contact (WhatsApp)</li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-medium mb-4 text-zinc-400">Support</h5>
+                <ul class="space-y-2 text-sm">
+                    <li>How to Run Projects</li>
+                    <li>Refund Policy</li>
+                    <li>Track Order</li>
+                    <li>Viva Preparation</li>
+                </ul>
+            </div>
+            <div class="col-span-2 md:col-span-1">
+                <div class="text-sm">Follow us for daily project tips</div>
+                <div class="flex gap-6 mt-4 text-3xl">
+                    <i class="fa-brands fa-instagram cursor-pointer"></i>
+                    <i class="fa-brands fa-youtube cursor-pointer"></i>
+                </div>
+                <div class="mt-12 text-xs text-zinc-400">© 2026 ProjectMart • Made with ❤️ for Indian students</div>
             </div>
         </div>
     </footer>
 
-    <!-- PROJECT MODAL -->
-    <div id="projectModal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-        <div class="bg-white rounded-3xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-auto">
-            <div class="p-8">
-                <div class="flex justify-between mb-6">
-                    <div id="modalTitle" class="text-3xl font-semibold"></div>
-                    <button onclick="closeProjectModal()" class="text-4xl text-slate-400">×</button>
-                </div>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <img id="modalImage" class="rounded-3xl w-full" alt="">
-                    <div>
-                        <div id="modalPrice" class="text-4xl font-bold"></div>
-                        <div id="modalTech" class="text-[#1e40af] mt-2"></div>
-                        <div id="modalDesc" class="mt-6 text-slate-600"></div>
-                        <button onclick="addToCartFromModal()" 
-                                class="mt-10 w-full bg-[#1e40af] text-white py-6 rounded-3xl text-xl font-semibold">
-                            Add to Cart
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MY ACCOUNT MODAL (Now Working) -->
-    <div id="accountModal" onclick="if(event.target.id==='accountModal') closeAccountModal()" 
-         class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[100]">
-        <div class="bg-white rounded-3xl max-w-lg w-full p-8">
-            <h3 class="text-2xl font-semibold mb-6 flex items-center gap-3">
-                <i class="fa-solid fa-user"></i> My Account
-            </h3>
-
-            <!-- Login Form -->
-            <div id="loginForm">
-                <input id="loginEmail" type="email" placeholder="your.email@example.com" 
-                       class="w-full px-5 py-4 border rounded-2xl mb-4 focus:outline-none focus:border-[#1e40af]">
-                <button onclick="loginUser()" 
-                        class="w-full bg-[#1e40af] text-white py-4 rounded-2xl font-semibold mb-6">Login</button>
-                <p class="text-center text-sm text-slate-500">Demo Mode: Any email works</p>
-            </div>
-
-            <!-- Logged In View -->
-            <div id="loggedInView" class="hidden">
-                <div class="mb-6">
-                    <p class="font-medium">Welcome, <span id="userName" class="text-[#1e40af]"></span></p>
-                    <p id="userEmail" class="text-sm text-slate-500"></p>
-                </div>
-
-                <h4 class="font-semibold mb-4">My Downloads</h4>
-                <div id="downloadsList" class="space-y-4 text-sm">
-                    <!-- Dynamic downloads appear here after purchase -->
-                </div>
-
-                <button onclick="logoutUser()" 
-                        class="mt-8 w-full border border-red-300 text-red-600 py-4 rounded-2xl font-medium">Logout</button>
-            </div>
-
-            <button onclick="closeAccountModal()" class="mt-6 text-slate-400 w-full">Close</button>
-        </div>
-    </div>
-
-    <!-- CONTACT MODAL (Now Working) -->
-    <div id="contactModal" onclick="if(event.target.id==='contactModal') closeContactModal()" 
-         class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[100]">
-        <div class="bg-white rounded-3xl max-w-md w-full p-8">
-            <h3 class="text-2xl font-semibold mb-2">Contact Tanushri</h3>
-            <p class="text-slate-500 mb-6">Need help or want a custom project? I'm here to help!</p>
-
-            <input id="contactName" placeholder="Your Name" class="w-full px-5 py-4 border rounded-2xl mb-4">
-            <input id="contactEmail" type="email" placeholder="Your Email" class="w-full px-5 py-4 border rounded-2xl mb-4">
-            <textarea id="contactMessage" rows="4" placeholder="Your message or requirement..." 
-                      class="w-full px-5 py-4 border rounded-2xl mb-6"></textarea>
-
-            <button onclick="submitContact()" 
-                    class="w-full bg-[#1e40af] text-white py-4 rounded-2xl font-semibold">Send Message</button>
-        </div>
-    </div>
-
-    <!-- CART SIDEBAR (Fully Working) -->
-    <div id="cartSidebar" class="hidden fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-[200] overflow-auto">
-        <div class="p-6 border-b flex justify-between">
-            <h3 class="text-2xl font-semibold">Your Cart</h3>
-            <button onclick="toggleCart()" class="text-4xl text-slate-400">×</button>
-        </div>
-
-        <div id="cartItems" class="p-6 space-y-6"></div>
-
-        <div class="p-6 border-t sticky bottom-0 bg-white">
-            <div class="flex justify-between text-xl font-semibold mb-6">
-                <span>Total</span>
-                <span id="cartTotal">₹0</span>
-            </div>
-            <button onclick="proceedToCheckout()" 
-                    class="w-full bg-emerald-600 text-white py-6 rounded-3xl text-xl font-semibold">
-                Pay with Razorpay
-            </button>
-        </div>
-    </div>
-
     <script>
-        // Projects Data
-        let projects = [
-            { id: 1, title: "AI Resume Analyzer", price: 1499, tech: "Python, Streamlit, NLP", 
-              image: "https://picsum.photos/id/1015/800/500", desc: "Get ATS score and improvement suggestions instantly." },
-            { id: 2, title: "Smart Hostel Management", price: 1699, tech: "Django, React", 
-              image: "https://picsum.photos/id/201/800/500", desc: "Room allocation, fees and complaint system." },
-            { id: 3, title: "Face Recognition Attendance", price: 1199, tech: "Python, OpenCV", 
-              image: "https://picsum.photos/id/237/800/500", desc: "Automatic attendance with Excel reports." }
-        ];
+        let projectsDB = [
+            {
+                id: 1, title: "AI Resume Analyzer with NLP", price: 1499, category: "ml",
+                tech: "Python • OpenAI • Streamlit • Pandas", image: "https://picsum.photos/id/1015/800/560",
+                desc: "Upload any resume and get instant ATS score, keyword matching, improvement suggestions and LaTeX formatted resume. Most popular ML project in 2026.",
+                includes: ["✅ Full Source Code", "✅ 35-page Report", "✅ PPT (18 slides)", "✅ Viva Questions (25)", "✅ Video Demo", "✅ Deployment Guide"]
+            },
+            {
+                id: 2, title: "Smart Hostel Management System", price: 1699, category: "web",
+                tech: "Django • React • Tailwind • PostgreSQL", image: "https://picsum.photos/id/201/800/560",
+                desc: "Room allotment, mess fees, complaint portal, visitor log and admin dashboard. Built exactly as per SPPU syllabus.",
+                includes: ["✅ Complete Full-Stack Code", "✅ Database Schema", "✅ Report + PPT", "✅ Live Demo Link", "✅ 1-Year Free Updates"]
+            },
+            {
+                id: 3, title: "Face Recognition Attendance System", price: 1199, category: "ml",
+                tech: "Python • OpenCV • Flask", image: "https://picsum.photos/id/237/800/560",
+                desc: "Automatic attendance using webcam. Excel report + email notification. Used by 200+ colleges.",
+                includes: ["✅ Source Code", "✅ Trained Model", "✅ Report", "✅ PPT", "✅ Dataset"]
+            },
+            {
+                id: 4, title: "E-Commerce Platform with AI Recommendation", price: 1899, category: "web",
+                tech: "React TS • Node.js • MongoDB", image: "https://picsum.photos/id/180/800/560",
+                desc: "Modern online store with cart, payment, admin panel and product recommendation engine.",
+                includes: ["✅ MERN Stack Code", "✅ Report", "✅ PPT", "✅ Deployment Video"]
+            },
+            {
+                id: 5, title: "Online Examination Portal with Proctoring", price: 2299, category: "web",
+                tech: "Django • WebRTC • Tailwind", image: "https://picsum.photos/id/251/800/560",
+                desc: "Live proctoring using webcam, auto evaluation, result analytics. Perfect major project.",
+                includes: ["✅ Full Code + Admin Panel", "✅ Report", "✅ PPT", "✅ Anti-Cheat Features"]
+            },
+            {
+                id: 6, title: "Android Food Delivery App (Swiggy Clone)", price: 999, category: "android",
+                tech: "Kotlin • Firebase • MVVM", image: "https://picsum.photos/id/1005/800/560",
+                desc: "Real-time tracking, order history, push notifications. Ready for Play Store.",
+                includes: ["✅ Android Studio Project", "✅ Backend Code", "✅ Report"]
+            },
+            {
+                id: 7, title: "Java Spring Boot Banking System", price: 1399, category: "java",
+                tech: "Java • Spring Boot • MySQL", image: "https://picsum.photos/id/160/800/560",
+                desc: "Secure banking with JWT auth, transactions, loan calculator and admin panel.",
+                includes: ["✅ Microservices Ready", "✅ Report + PPT"]
+            },
+            {
+                id: 8, title: "Movie Recommendation System using ML", price: 1299, category: "ml",
+                tech: "Python • Scikit-learn • Flask", image: "https://picsum.photos/id/870/800/560",
+                desc: "Content-based + Collaborative filtering. Deployed on Heroku.",
+                includes: ["✅ Source + Dataset", "✅ Report", "✅ PPT"]
+            },
+            {
+                id: 9, title: "Chat Application with Real-time Messaging", price: 1599, category: "web",
+                tech: "Django Channels • React", image: "https://picsum.photos/id/1009/800/560",
+                desc: "WhatsApp-like real-time chat using WebSockets.",
+                includes: ["✅ Full Code", "✅ Deployment Guide"]
+            },
+            {
+                id: 10, title: "IoT Smart Home Automation (ESP32)", price: 1799, category: "other",
+                tech: "Arduino • ESP32 • MQTT", image: "https://picsum.photos/id/1016/800/560",
+                desc: "Control lights, fan, security using mobile app.",
+                includes: ["✅ Circuit Diagram", "✅ Code", "✅ Report"]
+            }
+        ]
 
-        let cart = [];
-        let currentUser = null;
-        let purchasedProjects = [];
+        let cart = []
 
-        function renderProjects() {
-            const container = document.getElementById('projectsGrid');
-            container.innerHTML = '';
-            projects.forEach(p => {
-                const card = document.createElement('div');
-                card.className = 'project-card bg-white rounded-3xl overflow-hidden cursor-pointer';
-                card.innerHTML = `
-                    <img src="${p.image}" class="w-full h-56 object-cover">
+        function renderProjects(filtered) {
+            const container = document.getElementById('projectsGrid')
+            container.innerHTML = ''
+            
+            filtered.forEach(proj => {
+                const cardHTML = `
+                <div onclick="showProjectModal(${proj.id})" class="project-card cursor-pointer bg-white rounded-3xl overflow-hidden border border-transparent hover:border-blue-200">
+                    <div class="relative">
+                        <img src="${proj.image}" class="w-full aspect-video object-cover">
+                        <div class="absolute top-4 right-4 bg-white text-xs font-bold px-3 py-1 rounded-3xl shadow">₹${proj.price}</div>
+                    </div>
                     <div class="p-6">
-                        <h3 class="font-semibold text-xl">${p.title}</h3>
-                        <p class="text-[#1e40af] text-sm">${p.tech}</p>
-                        <p class="text-slate-600 mt-4 text-sm">${p.desc}</p>
-                        <div class="mt-6 flex justify-between items-center">
-                            <span class="text-2xl font-bold">₹${p.price}</span>
-                            <button onclick="event.stopImmediatePropagation(); showProjectModal(${p.id});" 
-                                    class="bg-[#1e40af] text-white px-6 py-2 rounded-3xl text-sm">View</button>
+                        <h3 class="font-semibold text-xl leading-tight mb-1">${proj.title}</h3>
+                        <p class="text-blue-600 text-sm mb-4">${proj.tech}</p>
+                        <p class="text-zinc-500 text-sm line-clamp-3 mb-6">${proj.desc.substring(0, 110)}...</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex -space-x-2">
+                                <span class="text-[10px] bg-blue-100 text-blue-700 px-2.5 py-px rounded-3xl">SPPU</span>
+                                <span class="text-[10px] bg-emerald-100 text-emerald-700 px-2.5 py-px rounded-3xl">2026</span>
+                            </div>
+                            <button class="text-blue-600 text-sm font-medium flex items-center gap-1">
+                                View Details <i class="fa-solid fa-chevron-right text-xs"></i>
+                            </button>
                         </div>
                     </div>
-                `;
-                card.onclick = () => showProjectModal(p.id);
-                container.appendChild(card);
-            });
+                </div>`
+                container.innerHTML += cardHTML
+            })
+            
+            if (filtered.length === 0) {
+                container.innerHTML = `<p class="col-span-full text-center py-12 text-zinc-400">No projects found. Try different keywords.</p>`
+            }
         }
 
-        let currentProject = null;
         function showProjectModal(id) {
-            currentProject = projects.find(p => p.id === id);
-            document.getElementById('modalTitle').textContent = currentProject.title;
-            document.getElementById('modalPrice').textContent = `₹${currentProject.price}`;
-            document.getElementById('modalTech').textContent = currentProject.tech;
-            document.getElementById('modalDesc').textContent = currentProject.desc;
-            document.getElementById('modalImage').src = currentProject.image;
-
-            document.getElementById('projectModal').classList.remove('hidden');
-            document.getElementById('projectModal').classList.add('flex');
+            const project = projectsDB.find(p => p.id === id)
+            if (!project) return
+            
+            document.getElementById('modalHeader').innerHTML = `
+                <h1 class="text-4xl font-semibold">${project.title}</h1>
+                <p class="text-blue-600">${project.tech}</p>
+            `
+            document.getElementById('modalPrice').innerHTML = `₹${project.price} <span class="text-base font-normal text-zinc-400">one-time</span>`
+            document.getElementById('modalTechStack').innerHTML = `<span class="inline-flex items-center bg-blue-100 text-blue-700 text-xs font-medium px-4 h-8 rounded-3xl">${project.tech}</span>`
+            document.getElementById('modalImage').src = project.image
+            document.getElementById('modalDesc').textContent = project.desc
+            
+            const includesHTML = project.includes.map(item => `<div class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-emerald-500"></i><span>${item}</span></div>`).join('')
+            document.getElementById('modalIncludes').innerHTML = includesHTML
+            
+            document.getElementById('projectModal').classList.remove('hidden')
+            document.getElementById('projectModal').classList.add('flex')
         }
 
-        function closeProjectModal() {
-            document.getElementById('projectModal').classList.add('hidden');
-            document.getElementById('projectModal').classList.remove('flex');
+        function closeModal() {
+            const modal = document.getElementById('projectModal')
+            modal.classList.add('hidden')
+            modal.classList.remove('flex')
         }
 
         function addToCartFromModal() {
-            if (!currentProject) return;
-            cart.push({...currentProject});
-            updateCartCount();
-            closeProjectModal();
-            alert(`${currentProject.title} added to cart!`);
+            const title = document.querySelector('#modalHeader h1').textContent
+            const project = projectsDB.find(p => p.title === title)
+            if (project) {
+                cart.push(project)
+                updateCartUI()
+                closeModal()
+                setTimeout(() => toggleCart(), 600)
+            }
         }
 
-        function updateCartCount() {
-            document.getElementById('cartCount').textContent = cart.length;
+        function updateCartUI() {
+            document.getElementById('cartCountBadge').textContent = cart.length
         }
 
         function toggleCart() {
-            const sidebar = document.getElementById('cartSidebar');
-            sidebar.classList.toggle('hidden');
-            if (!sidebar.classList.contains('hidden')) renderCart();
+            const sidebar = document.getElementById('cartSidebar')
+            sidebar.classList.toggle('hidden')
+            
+            if (!sidebar.classList.contains('hidden')) {
+                renderCart()
+            }
         }
 
         function renderCart() {
-            const container = document.getElementById('cartItems');
-            container.innerHTML = '';
-            let total = 0;
-
+            const container = document.getElementById('cartItemsContainer')
+            container.innerHTML = ''
+            
             if (cart.length === 0) {
-                container.innerHTML = `<p class="text-center py-12 text-slate-400">Cart is empty</p>`;
-                document.getElementById('cartTotal').textContent = '₹0';
-                return;
+                container.innerHTML = `<div class="text-center py-20"><p class="text-6xl mb-4">🛒</p><p class="font-medium">Your cart is empty</p><p class="text-zinc-400">Add some amazing projects!</p></div>`
+                document.getElementById('cartTotalPrice').textContent = '₹0'
+                return
             }
-
+            
+            let total = 0
             cart.forEach((item, index) => {
-                total += item.price;
-                container.innerHTML += `
-                    <div class="flex gap-4 border-b pb-6">
-                        <img src="${item.image}" class="w-20 h-20 object-cover rounded-2xl">
-                        <div class="flex-1">
-                            <h4>${item.title}</h4>
-                            <p class="text-sm text-[#1e40af]">${item.tech}</p>
-                            <p class="font-semibold">₹${item.price}</p>
-                        </div>
-                        <button onclick="removeFromCart(${index}); renderCart()" class="text-red-500">Remove</button>
-                    </div>`;
-            });
-            document.getElementById('cartTotal').textContent = `₹${total}`;
+                total += item.price
+                const itemHTML = `
+                <div class="flex gap-5 mb-8 last:mb-0">
+                    <img src="${item.image}" class="w-24 h-20 object-cover rounded-2xl">
+                    <div class="flex-1">
+                        <h4 class="font-medium">${item.title}</h4>
+                        <p class="text-xs text-blue-600">${item.tech}</p>
+                        <p class="font-semibold text-xl mt-3">₹${item.price}</p>
+                    </div>
+                    <button onclick="removeFromCart(${index}); renderCart()" class="text-red-400 hover:text-red-600 self-start">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </div>`
+                container.innerHTML += itemHTML
+            })
+            
+            document.getElementById('cartTotalPrice').textContent = `₹${total}`
         }
 
         function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCartCount();
+            cart.splice(index, 1)
+            updateCartUI()
         }
 
         function proceedToCheckout() {
-            if (cart.length === 0) return;
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            
-            // Simulate purchase
-            purchasedProjects = purchasedProjects.concat(cart);
-            alert(`✅ Payment Successful!\nTotal: ₹${total}\n\nDownload links have been sent to your email.\nCheck "My Account" → My Downloads`);
-            
-            cart = [];
-            updateCartCount();
-            toggleCart();
+            if (cart.length === 0) return
+            const total = cart.reduce((acc, item) => acc + item.price, 0)
+            alert(`🎉 Thank you!\n\nTotal amount: ₹${total}\n\nIn the real Django version this would open Razorpay checkout popup.\n\nDemo payment successful! (Fake order ID: ORD-${Math.floor(Math.random()*1000000)})`)
+            cart = []
+            updateCartUI()
+            toggleCart()
         }
 
-        // My Account Functions
-        function showAccountModal() {
-            document.getElementById('accountModal').classList.remove('hidden');
-            document.getElementById('accountModal').classList.add('flex');
+        function filterProjects() {
+            const term = document.getElementById('searchInput').value.toLowerCase().trim()
+            const filtered = projectsDB.filter(p => 
+                p.title.toLowerCase().includes(term) ||
+                p.tech.toLowerCase().includes(term) ||
+                p.desc.toLowerCase().includes(term)
+            )
+            renderProjects(filtered)
+        }
 
-            if (currentUser) {
-                showLoggedInView();
-            } else {
-                document.getElementById('loginForm').classList.remove('hidden');
-                document.getElementById('loggedInView').classList.add('hidden');
+        function filterByCategory(cat) {
+            let filtered = projectsDB
+            if (cat !== 'all') {
+                filtered = projectsDB.filter(p => p.category === cat)
             }
+            renderProjects(filtered)
+            document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })
         }
 
-        function closeAccountModal() {
-            document.getElementById('accountModal').classList.add('hidden');
-            document.getElementById('accountModal').classList.remove('flex');
-        }
-
-        function loginUser() {
-            const email = document.getElementById('loginEmail').value || "student@example.com";
-            currentUser = { name: "Tanu", email: email };
-
-            document.getElementById('loginForm').classList.add('hidden');
-            showLoggedInView();
-        }
-
-        function showLoggedInView() {
-            document.getElementById('loggedInView').classList.remove('hidden');
-            document.getElementById('userName').textContent = currentUser.name;
-            document.getElementById('userEmail').textContent = currentUser.email;
-            renderDownloads();
-        }
-
-        function renderDownloads() {
-            const container = document.getElementById('downloadsList');
-            container.innerHTML = '';
-            if (purchasedProjects.length === 0) {
-                container.innerHTML = `<p class="text-slate-400">No downloads yet. Buy some projects!</p>`;
-                return;
-            }
-            purchasedProjects.forEach(p => {
-                container.innerHTML += `<div class="flex justify-between items-center bg-slate-50 p-4 rounded-2xl">
-                    <span>${p.title}</span>
-                    <button onclick="alert('Downloading ${p.title}... (Demo)')" class="text-[#1e40af] text-sm">Download</button>
-                </div>`;
-            });
-        }
-
-        function logoutUser() {
-            currentUser = null;
-            closeAccountModal();
-            alert("Logged out successfully.");
-        }
-
-        // Contact Form
-        function showContactModal() {
-            document.getElementById('contactModal').classList.remove('hidden');
-            document.getElementById('contactModal').classList.add('flex');
-        }
-
-        function closeContactModal() {
-            document.getElementById('contactModal').classList.add('hidden');
-            document.getElementById('contactModal').classList.remove('flex');
-        }
-
-        function submitContact() {
-            const name = document.getElementById('contactName').value;
-            closeContactModal();
-            setTimeout(() => {
-                alert(`Thank you ${name || 'Student'}!\nYour message has been sent to Tanushri.\nShe will reply on WhatsApp/Email soon.`);
-            }, 400);
+        function fakeLogin() {
+            alert("🔐 Login / Register modal would open here.\n\nIn full Django version you’ll get your own dashboard with order history and downloads.")
         }
 
         function showFreeProjectModal() {
-            alert("🎉 FREE PROJECT\nPython Fireworks Animation sent to your email!\nCheck your inbox.");
+            document.getElementById('freeModal').classList.remove('hidden')
+            document.getElementById('freeModal').classList.add('flex')
         }
 
-        function subscribeNewsletter() {
-            const msg = document.getElementById('newsletterMsg');
-            msg.classList.remove('hidden');
-            setTimeout(() => msg.classList.add('hidden'), 3000);
+        function closeFreeModal() {
+            const m = document.getElementById('freeModal')
+            m.classList.add('hidden')
+            m.classList.remove('flex')
         }
 
-        function scrollToSection(id) {
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        function claimFreeProject() {
+            closeFreeModal()
+            setTimeout(() => {
+                alert("✅ FREE PROJECT DOWNLOADED!\n\nFireworks Animation (Python + Pygame)\n\nCheck your Downloads folder.\n\nEnjoy your free gift from ProjectMart 🎉")
+            }, 400)
         }
 
         // Initialize
         window.onload = () => {
-            renderProjects();
-            console.log("%c✅ My Account and Contact are now fully working!", "color:#1e40af; font-weight:bold");
-        };
+            renderProjects(projectsDB)
+            
+            // Animate stat numbers
+            document.querySelectorAll('.stat-number').forEach(el => {
+                const target = parseFloat(el.getAttribute('data-count'))
+                let count = 0
+                const increment = target / 60
+                const timer = setInterval(() => {
+                    count += increment
+                    if (count >= target) {
+                        count = target
+                        clearInterval(timer)
+                    }
+                    el.textContent = count % 1 === 0 ? Math.floor(count) : count.toFixed(2)
+                }, 30)
+            })
+
+            // Active nav highlighting
+            const navLinks = document.querySelectorAll('.nav-link')
+            window.addEventListener('scroll', () => {
+                const sections = ['projects','how','categories','sell','about','faq','support']
+                let current = ''
+                sections.forEach(id => {
+                    const section = document.getElementById(id)
+                    if (section && window.scrollY >= section.offsetTop - 150) {
+                        current = id
+                    }
+                })
+                navLinks.forEach(link => {
+                    link.classList.remove('active')
+                    if (link.getAttribute('onclick') && link.getAttribute('onclick').includes(current)) {
+                        link.classList.add('active')
+                    }
+                })
+            })
+
+            console.log('%c🚀 ProjectMart Website Loaded Successfully!', 'background:#3b82f6;color:#fff;padding:4px 8px;border-radius:4px;font-weight:bold')
+        }
     </script>
 </body>
 </html>

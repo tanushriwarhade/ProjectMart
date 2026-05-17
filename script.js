@@ -1,5 +1,5 @@
 // ==================== DATA ====================
-const projectsDB = [
+
     {id:1,title:"AI Resume Analyzer with NLP",price:1499,category:"ml",tech:"Python • OpenAI • Streamlit • Pandas",image:"https://picsum.photos/id/1015/800/560",desc:"Upload any resume and get instant ATS score...",includes:["Full Source Code","35-page Report","PPT (18 slides)","25 Viva Questions","Video Demo","Deployment Guide"]},
     {id:2,title:"Smart Hostel Management System",price:1699,category:"web",tech:"Django • React • Tailwind • PostgreSQL",image:"https://picsum.photos/id/201/800/560",desc:"Room allotment, mess fees, complaint portal...",includes:["Complete Full-Stack Code","Database Schema","Report + PPT","Live Demo Link"]},
     {id:3,title:"Face Recognition Attendance System",price:1199,category:"ml",tech:"Python • OpenCV • Flask",image:"https://picsum.photos/id/237/800/560",desc:"Automatic attendance using webcam...",includes:["Source Code","Trained Model","Report","PPT","Dataset"]},

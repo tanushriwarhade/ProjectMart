@@ -10,7 +10,7 @@ const projectsDB = [
     {id:8,title:"Movie Recommendation System using ML",price:1299,category:"ml",tech:"Python • Scikit-learn • Flask",image:"https://picsum.photos/id/870/800/560",desc:"Content-based + Collaborative filtering...",includes:["Source + Dataset","Report","PPT"]},
     {id:9,title:"Chat Application with Real-time Messaging",price:1599,category:"web",tech:"Django Channels • React",image:"https://picsum.photos/id/1009/800/560",desc:"WhatsApp-like real-time chat...",includes:["Full Code","Deployment Guide"]},
     {id:10,title:"IoT Smart Home Automation (ESP32)",price:1799,category:"other",tech:"Arduino • ESP32 • MQTT",image:"https://picsum.photos/id/1016/800/560",desc:"Control lights, fan, security...",includes:["Circuit Diagram","Code","Report"]},
-];
+]; 
 
 const testimonials = [
     {name:"Rohan Patil",college:"Fergusson College",text:"Got 92/100... guide was impressed!",color:"bg-purple-100 text-purple-700"},
